@@ -1,12 +1,12 @@
 import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { products, sizes, formatPrice, pageHead, type Product } from '@/lib/catalog';
+import { products, sizes, formatPrice, pageHead, brand, type Product } from '@/lib/catalog';
 import { getRequestOrigin } from '@/lib/origin.functions';
 import { useBag } from '@/lib/bag';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from '@/components/ui/sheet';
-export const Route = createFileRoute('/product/$slug')({ loader: async ({params}) => { const product = products.find(item => item.slug === params.slug); if (!product) throw notFound(); return { ...product, origin: await getRequestOrigin() }; }, head: ({loaderData}) => pageHead(loaderData?.name ?? 'Piece unavailable', loaderData?.description ?? 'This piece is not part of the current demonstration wardrobe.', loaderData ? { type: 'product', image: loaderData.share, origin: loaderData.origin } : undefined), component: ProductRoute });
+export const Route = createFileRoute('/product/$slug')({ loader: async ({params}) => { const product = products.find(item => item.slug === params.slug); if (!product) throw notFound(); return { ...product, origin: await getRequestOrigin() }; }, head: ({loaderData}) => ({ ...pageHead(loaderData?.name ?? 'Piece unavailable', loaderData?.description ?? 'This piece is not part of the current demonstration wardrobe.', loaderData ? { type: 'product', image: loaderData.share, origin: loaderData.origin } : undefined), scripts: loaderData ? [{ type: 'application/ld+json', children: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: loaderData.name, description: loaderData.description, image: `${loaderData.origin}${loaderData.share}`, brand: { '@type': 'Brand', name: brand.full }, offers: { '@type': 'Offer', price: loaderData.price, priceCurrency: 'EUR' } }) }] : undefined }), component: ProductRoute });
 function ProductRoute() { const product = Route.useLoaderData(); return <ProductDetail key={product.slug} product={product} />; }
 function ProductDetail({product}: {product: Product}) {
  const bag = useBag(); const [size,setSize] = useState(''); const [error,setError] = useState(false); const [image,setImage] = useState(0); const [guide,setGuide] = useState(false); const active = product.gallery[image] ?? product.gallery[0];
