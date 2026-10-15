@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         editorial: "rounded-none border border-foreground bg-foreground text-background hover:bg-foreground/90 shadow-none",
         editorialLink: "rounded-none border-b border-current bg-transparent px-0 text-foreground hover:opacity-65 shadow-none",
-        hero: "rounded-none bg-background text-foreground hover:bg-secondary shadow-none",
+        hero: "rounded-none bg-photo-button text-photo-button-foreground hover:opacity-90 shadow-none",
         navigation: "rounded-none bg-transparent text-foreground hover:opacity-60 shadow-none",
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
