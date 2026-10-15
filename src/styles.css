@@ -344,3 +344,27 @@ main { animation: page-arrive .65s ease both; }
 ::view-transition-new(root) { animation: page-arriving .5s ease both; }
 @keyframes page-leaving { to { opacity: 0; } }
 @keyframes page-arriving { from { opacity: 0; transform: translateY(6px); } }
+
+/* Quiet, one-time garment reveals and tactile controls. */
+.product-card { transition: opacity .7s ease, translate .7s cubic-bezier(.22,1,.36,1); }
+.product-card[data-reveal=pending] { opacity: 0; translate: 0 22px; }
+.product-card[data-reveal=visible] { opacity: 1; translate: 0 0; }
+.product-grid .product-card:nth-child(3n + 2) { transition-delay: .08s; }
+.product-grid .product-card:nth-child(3n) { transition-delay: .16s; }
+.product-card:focus-within { opacity: 1; translate: 0 0; transition-delay: 0s; }
+.product-image { transition: transform .8s cubic-bezier(.22,1,.36,1); }
+.product-card:focus-within .product-image { transform: scale(1.025); }
+.product-name { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 5px; transition: text-decoration-color .3s ease; }
+.product-name:hover { text-decoration-color: currentColor; }
+.motion-control { transition: background-color .25s ease, color .25s ease, opacity .25s ease, transform .25s cubic-bezier(.22,1,.36,1); }
+.motion-control:active:not(:disabled) { transform: scale(.97); }
+@media(hover:hover) {
+ .wardrobe-arrow:hover:not(:disabled) { transform: translateY(-2px); }
+ .wardrobe-arrow svg { transition: transform .3s ease; }
+ .wardrobe-arrow:hover:not(:disabled) svg { transform: translateX(2px); }
+ .wardrobe-arrow:first-child:hover:not(:disabled) svg { transform: translateX(-2px); }
+}
+@media(prefers-reduced-motion:reduce) {
+ .product-card[data-reveal] { opacity: 1; translate: none; }
+ .motion-control:active:not(:disabled),.wardrobe-arrow:hover:not(:disabled),.wardrobe-arrow:hover:not(:disabled) svg,.product-card:focus-within .product-image,.product-card:hover .product-image { transform: none; }
+}
