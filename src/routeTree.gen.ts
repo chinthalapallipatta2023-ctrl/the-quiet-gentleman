@@ -13,7 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as InformationRouteImport } from './routes/information'
 import { Route as JournalRouteImport } from './routes/journal'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as StylistRouteImport } from './routes/stylist'
+import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
@@ -38,9 +41,24 @@ const JournalRoute = JournalRouteImport.update({
   path: '/journal',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StylistRoute = StylistRouteImport.update({
+  id: '/stylist',
+  path: '/stylist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WishlistRoute = WishlistRouteImport.update({
+  id: '/wishlist',
+  path: '/wishlist',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JournalIndexRoute = JournalIndexRouteImport.update({
@@ -64,7 +82,10 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/information': typeof InformationRoute
   '/journal': typeof JournalRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
   '/shop': typeof ShopRoute
+  '/stylist': typeof StylistRoute
+  '/wishlist': typeof WishlistRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/product/$slug': typeof ProductSlugRoute
   '/journal/': typeof JournalIndexRoute
@@ -73,7 +94,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/information': typeof InformationRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/shop': typeof ShopRoute
+  '/stylist': typeof StylistRoute
+  '/wishlist': typeof WishlistRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/product/$slug': typeof ProductSlugRoute
   '/journal': typeof JournalIndexRoute
@@ -84,7 +108,10 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/information': typeof InformationRoute
   '/journal': typeof JournalRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
   '/shop': typeof ShopRoute
+  '/stylist': typeof StylistRoute
+  '/wishlist': typeof WishlistRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/product/$slug': typeof ProductSlugRoute
   '/journal/': typeof JournalIndexRoute
@@ -96,7 +123,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/information'
     | '/journal'
+    | '/reset-password'
     | '/shop'
+    | '/stylist'
+    | '/wishlist'
     | '/journal/$slug'
     | '/product/$slug'
     | '/journal/'
@@ -105,7 +135,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/information'
+    | '/reset-password'
     | '/shop'
+    | '/stylist'
+    | '/wishlist'
     | '/journal/$slug'
     | '/product/$slug'
     | '/journal'
@@ -115,7 +148,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/information'
     | '/journal'
+    | '/reset-password'
     | '/shop'
+    | '/stylist'
+    | '/wishlist'
     | '/journal/$slug'
     | '/product/$slug'
     | '/journal/'
@@ -126,7 +162,10 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   InformationRoute: typeof InformationRoute
   JournalRoute: typeof JournalRouteWithChildren
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ShopRoute: typeof ShopRoute
+  StylistRoute: typeof StylistRoute
+  WishlistRoute: typeof WishlistRoute
   ProductSlugRoute: typeof ProductSlugRoute
 }
 
@@ -160,11 +199,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JournalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stylist': {
+      id: '/stylist'
+      path: '/stylist'
+      fullPath: '/stylist'
+      preLoaderRoute: typeof StylistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wishlist': {
+      id: '/wishlist'
+      path: '/wishlist'
+      fullPath: '/wishlist'
+      preLoaderRoute: typeof WishlistRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journal/': {
@@ -209,7 +269,10 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   InformationRoute: InformationRoute,
   JournalRoute: JournalRouteWithChildren,
+  ResetPasswordRoute: ResetPasswordRoute,
   ShopRoute: ShopRoute,
+  StylistRoute: StylistRoute,
+  WishlistRoute: WishlistRoute,
   ProductSlugRoute: ProductSlugRoute,
 }
 export const routeTree = rootRouteImport

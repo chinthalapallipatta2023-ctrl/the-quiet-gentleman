@@ -6,3 +6,7 @@
 - [x] Add animated light/dark switch and larger readable typography.
 - [x] Expand demonstration wardrobe and make homepage selection horizontally scrollable.
 - [x] Add gentle motion and verify both appearances and shopping flow.
+- [x] Add account-backed wishlists with save, remove and revisit controls.
+- [x] Add occasion, fit and style recommendations using Lovable AI.
+- [x] Verify real AI catalogue matching, form validation, public pages and mobile layout.
+- [ ] Verify signed-in save/revisit/remove and stylist submission; blocked until a shopper signs in through the preview.
