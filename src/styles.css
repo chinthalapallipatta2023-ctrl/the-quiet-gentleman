@@ -372,3 +372,42 @@ main { animation: page-arrive .65s ease both; }
  .product-card[data-reveal] { opacity: 1; translate: none; }
  .motion-control:active:not(:disabled),.wardrobe-arrow:hover:not(:disabled),.wardrobe-arrow:hover:not(:disabled) svg,.product-card:focus-within .product-image,.product-card:hover .product-image { transform: none; }
 }
+
+/* Personal edits and account controls share the editorial grid. */
+.product-card { position: relative; }
+.wishlist-heart { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; }
+.heart-saved { fill: currentColor; }
+.wishlist-detail { width: 100%; margin-top: 12px; min-height: 46px; }
+.product-save-error { color: var(--destructive); font-size: 13px; margin-top: 10px; }
+.wishlist-heading { display: flex; justify-content: space-between; align-items: center; padding-block: 18px; margin-bottom: 30px; border-block: 1px solid var(--border); }
+.wishlist-empty { min-height: 320px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 24px; }
+.wishlist-empty h2 { font-family: var(--font-display); font-size: 36px; }
+.wishlist-bottom { padding-block: 48px 70px; }
+.auth-form { display: flex; flex-direction: column; gap: 16px; }
+.auth-form form { display: flex; flex-direction: column; gap: 12px; }
+.auth-form input,.stylist-form textarea { width: 100%; padding: 13px; color: var(--foreground); background: var(--background); border: 1px solid var(--border); border-radius: 0; font: inherit; }
+.auth-form input:focus-visible,.stylist-form textarea:focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; }
+.auth-form label,.stylist-form label,.stylist-form legend { font-size: 15px; font-weight: 500; }
+.auth-divider { color: var(--muted-foreground); text-align: center; font-size: 13px; }
+.reset-form { max-width: 430px; padding-bottom: 80px; }
+.stylist-form { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; padding-block: 30px 40px; border-block: 1px solid var(--border); }
+.stylist-form > div { display: flex; flex-direction: column; gap: 12px; }
+.stylist-form textarea { min-height: 120px; resize: vertical; }
+.stylist-form fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.fit-options { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.fit-options [aria-pressed=true] { background: var(--foreground); color: var(--background); }
+.stylist-form > button { align-self: end; justify-self: start; min-height: 48px; }
+.stylist-results { padding-block: 55px 30px; }
+.stylist-reason { color: var(--muted-foreground); font-size: 15px; line-height: 1.8; margin-top: 18px; }
+.stylist-page > .demo-note { padding-block: 20px 55px; }
+.stylist-spinner { animation: stylist-spin 1.2s linear infinite; }
+@keyframes stylist-spin { to { transform: rotate(360deg); } }
+@media(max-width:640px) {
+ .header-inner { grid-template-columns: 30px minmax(0,1fr) auto; gap: 3px; }
+ .wordmark-sub,.wordmark-divider { display: none; }
+ .header-actions { gap: 0; }
+ .header-actions > a { width: 28px; padding: 0; }
+ .stylist-form { grid-template-columns: 1fr; gap: 24px; }
+ .wishlist-heart { top: 8px; right: 8px; width: 36px; height: 36px; }
+}
+@media(prefers-reduced-motion:reduce) { .stylist-spinner { animation: none; } }

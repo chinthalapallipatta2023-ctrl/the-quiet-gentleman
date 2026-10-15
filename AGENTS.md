@@ -16,6 +16,9 @@
 - Keep appearance preferences in the shared header with browser storage read after hydration; use fixed photography and garment color tokens so theme changes do not alter their colors.
 - Use Embla for the homepage wardrobe rail so touch dragging, snapping and arrow navigation share proven carousel behavior.
 - Product cards reveal once through IntersectionObserver after hydration; keep server-rendered content visible and respect reduced motion so browsing stays accessible.
-- Shared scroll reveals observe below-the-fold editorial content on each navigation, leaving the opening view visible and disabling fades for reduced motion.
+- Shared scroll reveals observe below-the-fold editorial content and use the Web Animations API rather than mutating React-owned attributes, preserving lazy hydration, opening-view visibility and reduced-motion support.
+- Wishlists use authenticated shopper ownership with database RLS; the shared provider loads persisted selections after hydration while the demonstration bag remains visit-only.
+- The stylist validates occasion, fit and style on both sides, calls Lovable AI through an authenticated server function, and permits only existing catalogue slugs in results.
+- Persist AI access and credit blocks in a service-only state table; restore access before clearing a paused state and starting a new request.
 
 - Social share (og:image/twitter:image) uses 1200x630 renditions served from public/share/; build absolute URLs in head() from the getRequestOrigin server function, never from bundled asset imports.

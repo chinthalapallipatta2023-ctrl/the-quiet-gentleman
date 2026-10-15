@@ -14,6 +14,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { BagProvider } from "@/lib/bag";
 import { SiteHeader, SiteFooter } from "@/components/site-shell";
+import { WishlistProvider } from '@/lib/wishlist';
+import { ShopperAuth } from '@/components/shopper-auth';
 import { ScrollReveals } from "@/components/scroll-reveals";
 
 function NotFoundComponent() {
@@ -126,7 +128,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <BagProvider><SiteHeader /><main><Outlet /></main><SiteFooter /><ScrollReveals /></BagProvider>
+      <BagProvider><WishlistProvider><SiteHeader /><main><Outlet /></main><SiteFooter /><ScrollReveals /><ShopperAuth /></WishlistProvider></BagProvider>
     </QueryClientProvider>
   );
 }
