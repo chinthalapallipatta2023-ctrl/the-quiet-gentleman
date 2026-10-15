@@ -16,5 +16,6 @@
 - Keep appearance preferences in the shared header with browser storage read after hydration; use fixed photography and garment color tokens so theme changes do not alter their colors.
 - Use Embla for the homepage wardrobe rail so touch dragging, snapping and arrow navigation share proven carousel behavior.
 - Product cards reveal once through IntersectionObserver after hydration; keep server-rendered content visible and respect reduced motion so browsing stays accessible.
+- Shared scroll reveals observe below-the-fold editorial content on each navigation, leaving the opening view visible and disabling fades for reduced motion.
 
 - Social share (og:image/twitter:image) uses 1200x630 renditions served from public/share/; build absolute URLs in head() from the getRequestOrigin server function, never from bundled asset imports.

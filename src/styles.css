@@ -303,9 +303,7 @@ main { animation: page-arrive .65s ease both; }
 .hero-content > :nth-child(3) { animation-delay: .2s; }
 .hero-content > :nth-child(4) { animation-delay: .3s; }
 @keyframes page-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-@supports (animation-timeline: view()) {
- .object-study,.section-heading,.campaign-copy { animation: page-arrive linear both; animation-timeline: view(); animation-range: entry 0% entry 25%; }
-}
+/* Below-the-fold editorial content is revealed by the shared scroll observer. */
 @media(max-width:900px) {
  .header-actions { gap: 10px; }
  .header-nav { gap: 15px; }
@@ -346,6 +344,11 @@ main { animation: page-arrive .65s ease both; }
 @keyframes page-arriving { from { opacity: 0; transform: translateY(6px); } }
 
 /* Quiet, one-time garment reveals and tactile controls. */
+[data-scroll-reveal] { transition: opacity .85s ease, translate .85s cubic-bezier(.22,1,.36,1); }
+[data-scroll-reveal=pending] { opacity: 0; translate: 0 28px; }
+[data-scroll-reveal=visible] { opacity: 1; translate: 0 0; }
+.object-copy[data-scroll-reveal],.campaign-copy[data-scroll-reveal] { transition-delay: .12s; }
+[data-scroll-reveal]:focus-within { opacity: 1; translate: 0 0; transition-delay: 0s; }
 .product-card { transition: opacity .7s ease, translate .7s cubic-bezier(.22,1,.36,1); }
 .product-card[data-reveal=pending] { opacity: 0; translate: 0 22px; }
 .product-card[data-reveal=visible] { opacity: 1; translate: 0 0; }
@@ -365,6 +368,7 @@ main { animation: page-arrive .65s ease both; }
  .wardrobe-arrow:first-child:hover:not(:disabled) svg { transform: translateX(-2px); }
 }
 @media(prefers-reduced-motion:reduce) {
+ [data-scroll-reveal] { opacity: 1; translate: none; transition: none; }
  .product-card[data-reveal] { opacity: 1; translate: none; }
  .motion-control:active:not(:disabled),.wardrobe-arrow:hover:not(:disabled),.wardrobe-arrow:hover:not(:disabled) svg,.product-card:focus-within .product-image,.product-card:hover .product-image { transform: none; }
 }
