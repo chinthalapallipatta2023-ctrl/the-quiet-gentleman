@@ -1,24 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { ArrowRight, ArrowDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ProductCard } from '@/components/product-card';
+import { imagery, products, pageHead } from '@/lib/catalog';
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+export const Route = createFileRoute('/')({ head: () => pageHead('A quieter kind of distinction', 'Considered silhouettes. Everyday pieces. Explore an editorial study in modern menswear.'), component: Index });
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+ return <><section className="hero"><img className="hero-image" src={imagery.campaign} alt="A man in an ivory shirt and charcoal trousers walks through a sunlit limestone courtyard" width={1920} height={1280} fetchPriority="high" /><div className="container-editorial hero-content"><p className="eyebrow hero-label">A STUDY IN MODERN DRESSING</p><h1>A quieter kind<br />of <em>distinction.</em></h1><p className="hero-description">Considered silhouettes. Everyday pieces.<br />A wardrobe shaped by the things that endure.</p><div className="hero-actions"><Button variant="hero" asChild className="h-11 px-6 text-[10px]"><Link to="/shop">DISCOVER THE COLLECTION <ArrowRight className="ml-3" /></Link></Button><Link to="/about" className="hero-secondary">OUR APPROACH</Link></div></div><div className="container-editorial hero-foot"><span>THE WARDROBE / A NEW PERSPECTIVE</span><span>SCROLL TO EXPLORE <ArrowDown className="size-3" /></span></div></section>
+ <div className="container-editorial intro-line"><p>Familiar forms. A fresh perspective.</p><span className="eyebrow text-muted-foreground">THE ART OF EVERYDAY</span></div>
+ <section className="container-editorial object-study"><div className="object-image"><Link to="/product/$slug" params={{slug:'everyday-shirt'}}><img src={imagery.shirt} alt="An editorial study of an ivory shirt, its relaxed collar and natural drape" width={1024} height={1536} loading="lazy" /></Link><div className="image-caption"><span>A STUDY OF FORM & FEEL</span><span>01 / THE EVERYDAY SHIRT</span></div></div><div className="object-copy"><p className="eyebrow text-muted-foreground">OBJECT STUDY / 001</p><h2>The Everyday<br />Shirt</h2><p className="object-intro">An exploration of proportion,<br />texture, and ease.</p><div className="object-rule" /><p className="body-copy">A familiar form, reconsidered through a relaxed silhouette and considered details. Designed to find its place in the everyday wardrobe.</p><Link to="/product/$slug" params={{slug:'everyday-shirt'}} className="text-action">EXPLORE THE PIECE <ArrowRight className="size-4" /></Link></div></section>
+ <section className="container-editorial collection-section"><div className="section-heading"><div><p className="eyebrow text-muted-foreground">A CONSIDERED SELECTION</p><h2>The Wardrobe</h2><p className="body-copy">Everyday menswear, bringing together familiar forms<br className="hidden sm:block" /> and contemporary proportions.</p></div><Link to="/shop" className="text-action">VIEW ALL PIECES <ArrowRight className="size-4" /></Link></div><div className="product-grid home-products">{products.map(product => <ProductCard key={product.slug} product={product} />)}</div></section>
+ <section className="campaign-section"><div className="campaign-copy"><span className="eyebrow">NOTES ON EVERYDAY LIVING</span><h2>Made for the<br />life you lead.</h2><p>A wardrobe shaped by movement, habit, and the everyday details that make a piece your own.</p><Link to="/journal/modern-dressing" className="text-action">READ THE STORY <ArrowRight className="size-4" /></Link></div><img className="campaign-photo" src={imagery.overshirt} alt="An olive overshirt worn naturally in a quiet architectural courtyard" width={1024} height={1536} loading="lazy" /></section></>;
 }

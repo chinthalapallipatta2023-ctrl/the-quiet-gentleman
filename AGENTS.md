@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep replaceable brand identity, fictional product data, image references and page metadata helpers in the browser-safe catalogue module so visual content can be changed without rewriting page layouts.
+- Use a shared root shell and typed TanStack routes for the wardrobe, products and editorial destinations so navigation and accessible overlays stay consistent.
+- Keep the demonstration bag in React context for the current visit only; this prototype does not take payments, persist orders or imply live inventory.
+- Define all visual roles and editorial layouts in the global token-based stylesheet; use design-system Button variants for controls.
