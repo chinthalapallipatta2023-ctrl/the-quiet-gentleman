@@ -13,3 +13,5 @@
 - Use a shared root shell and typed TanStack routes for the wardrobe, products and editorial destinations so navigation and accessible overlays stay consistent.
 - Keep the demonstration bag in React context for the current visit only; this prototype does not take payments, persist orders or imply live inventory.
 - Define all visual roles and editorial layouts in the global token-based stylesheet; use design-system Button variants for controls.
+- Keep appearance preferences in the shared header with browser storage read after hydration; use fixed photography and garment color tokens so theme changes do not alter their colors.
+- Use Embla for the homepage wardrobe rail so touch dragging, snapping and arrow navigation share proven carousel behavior.

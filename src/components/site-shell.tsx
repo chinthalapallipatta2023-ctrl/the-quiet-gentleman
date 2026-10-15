@@ -5,11 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { brand, products, formatPrice } from '@/lib/catalog';
 import { useBag } from '@/lib/bag';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export function Wordmark() { return <span className="wordmark"><span className="wordmark-main">{brand.name}</span><span className="wordmark-divider">/</span><span className="wordmark-sub">{brand.descriptor}</span></span>; }
 export function SiteHeader() {
  const bag = useBag(); const [menu, setMenu] = useState(false); const [search, setSearch] = useState(false); const [query, setQuery] = useState('');
- const count = bag.items.reduce((sum, item) => sum + item.quantity, 0);
+  const count = bag.items.reduce((sum, item) => sum + item.quantity, 0);
  const results = products.filter(product => `${product.name} ${product.category} ${product.color}`.toLowerCase().includes(query.toLowerCase()));
  return <><header className="site-header"><div className="container-editorial header-inner"><nav className="header-nav" aria-label="Main navigation"><Link to="/shop" className="nav-link">SHOP</Link><Link to="/journal" className="nav-link">JOURNAL</Link></nav><Button variant="navigation" size="icon" className="mobile-menu-button" aria-label="Open menu" onClick={() => setMenu(true)}><Menu /></Button><Link to="/" aria-label={`${brand.full} home`}><Wordmark /></Link><div className="header-actions"><Button variant="navigation" className="nav-link px-1" onClick={() => setSearch(true)} aria-label="Search"><span className="desktop-label">SEARCH</span><Search className="sm:hidden" /></Button><Button variant="navigation" className="nav-link px-1" onClick={() => bag.setOpen(true)} aria-label={`Open bag, ${count} items`}><span className="desktop-label">BAG ({count})</span><span className="sm:hidden flex items-center gap-1"><ShoppingBag /><span className="text-[9px]">{count}</span></span></Button></div></div></header>
  <Sheet open={menu} onOpenChange={setMenu}><SheetContent side="left" className="drawer-panel"><SheetTitle className="drawer-title">{brand.name}</SheetTitle><SheetDescription>The wardrobe & the world around it.</SheetDescription><nav className="menu-links" aria-label="Mobile navigation"><Link to="/shop" onClick={() => setMenu(false)}>Shop</Link><Link to="/journal" onClick={() => setMenu(false)}>Journal</Link><Link to="/about" onClick={() => setMenu(false)}>Our approach</Link></nav></SheetContent></Sheet>
