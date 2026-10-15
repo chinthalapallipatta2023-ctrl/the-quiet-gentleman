@@ -15,5 +15,6 @@
 - Define all visual roles and editorial layouts in the global token-based stylesheet; use design-system Button variants for controls.
 - Keep appearance preferences in the shared header with browser storage read after hydration; use fixed photography and garment color tokens so theme changes do not alter their colors.
 - Use Embla for the homepage wardrobe rail so touch dragging, snapping and arrow navigation share proven carousel behavior.
+- Product cards reveal once through IntersectionObserver after hydration; keep server-rendered content visible and respect reduced motion so browsing stays accessible.
 
 - Social share (og:image/twitter:image) uses 1200x630 renditions served from public/share/; build absolute URLs in head() from the getRequestOrigin server function, never from bundled asset imports.
