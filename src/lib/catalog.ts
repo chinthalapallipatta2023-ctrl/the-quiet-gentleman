@@ -19,7 +19,7 @@ export const products: Product[] = [
   { slug: 'straight-trouser', name: 'The Straight Trouser', category: 'Trousers', price: 120, color: 'Stone', colorToken: 'stone', image: stoneTrouser, share: '/share/stone-trouser.jpg', alt: 'Stone straight-leg trousers with an ivory tee and dark loafers', description: 'A clean line with room to move. An understated trouser in a lighter shade, ready to sit alongside the familiar pieces in your wardrobe.', details: ['Straight leg', 'Front pockets', 'Demonstration design; final materials and measurements to be confirmed.'], gallery: [{ src: stoneTrouser, alt: 'Full view of the stone Straight Trouser' }] },
 ];
 export const formatPrice = (amount: number) => new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(amount);
-export function pageHead(title: string, description: string, share?: { type?: 'article' | 'product'; image?: string; origin?: string }) {
+export function pageHead(title: string, description: string, share?: { type?: 'article' | 'product'; image?: string; origin?: string | undefined }) {
   const imageUrl = share?.image ? `${share.origin ?? ''}${share.image}` : undefined;
   return { meta: [{ title: `${title} — ${brand.full}` }, { name: 'description', content: description }, { property: 'og:title', content: `${title} — ${brand.full}` }, { property: 'og:description', content: description }, { property: 'og:type', content: share?.type ?? 'website' }, { name: 'twitter:card', content: 'summary_large_image' }, ...(imageUrl ? [{ property: 'og:image', content: imageUrl }, { name: 'twitter:image', content: imageUrl }] : [])] };
 }
