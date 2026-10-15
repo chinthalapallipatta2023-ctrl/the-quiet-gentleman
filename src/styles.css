@@ -337,4 +337,10 @@ main { animation: page-arrive .65s ease both; }
  .footer-links { gap: 24px; justify-content: space-between; }
  .image-caption { flex-wrap: wrap; gap: 8px; }
 }
-@media(prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } *,*::before,*::after { animation: none !important; transition: none !important; } }
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } *,*::before,*::after { animation: none !important; transition: none !important; } ::view-transition-old(root),::view-transition-new(root) { animation: none !important; } }
+
+/* Smooth cross-fade between pages */
+::view-transition-old(root) { animation: page-leaving .3s ease both; }
+::view-transition-new(root) { animation: page-arriving .5s ease both; }
+@keyframes page-leaving { to { opacity: 0; } }
+@keyframes page-arriving { from { opacity: 0; transform: translateY(6px); } }
