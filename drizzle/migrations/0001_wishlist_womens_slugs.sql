@@ -1,0 +1,2 @@
+ALTER TABLE public.wishlist_items DROP CONSTRAINT IF EXISTS wishlist_items_product_slug_check;
+ALTER TABLE public.wishlist_items ADD CONSTRAINT wishlist_items_product_slug_check CHECK (product_slug IN ('everyday-shirt','pleated-trouser','relaxed-overshirt','knit-polo','striped-shirt','straight-trouser','soft-blouse','wide-trouser','shirt-dress','knit-cardigan'));
