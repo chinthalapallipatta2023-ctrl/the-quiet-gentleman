@@ -17,6 +17,7 @@ import { SiteHeader, SiteFooter } from "@/components/site-shell";
 import { WishlistProvider } from '@/lib/wishlist';
 import { ShopperAuth } from '@/components/shopper-auth';
 import { ScrollReveals } from "@/components/scroll-reveals";
+import { CollectionProvider } from "@/lib/collection";
 
 function NotFoundComponent() {
   return (
@@ -84,10 +85,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "MAISON / MENSWEAR" },
-      { name: "description", content: "A considered perspective on contemporary menswear." },
-      { property: "og:title", content: "MAISON / MENSWEAR" },
-      { property: "og:description", content: "A considered perspective on contemporary menswear." },
+      { title: "The Thread House" },
+      { name: "description", content: "Where every thread tells a story. A considered perspective on contemporary menswear and womenswear." },
+      { property: "og:title", content: "The Thread House" },
+      { property: "og:description", content: "Where every thread tells a story. A considered perspective on contemporary menswear and womenswear." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -110,7 +111,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-collection="men" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
@@ -128,7 +129,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <BagProvider><WishlistProvider><SiteHeader /><main><Outlet /></main><SiteFooter /><ScrollReveals /><ShopperAuth /></WishlistProvider></BagProvider>
+      <CollectionProvider><BagProvider><WishlistProvider><SiteHeader /><main><Outlet /></main><SiteFooter /><ScrollReveals /><ShopperAuth /></WishlistProvider></BagProvider></CollectionProvider>
     </QueryClientProvider>
   );
 }
