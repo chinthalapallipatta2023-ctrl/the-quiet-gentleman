@@ -13,12 +13,12 @@ export function CollectionProvider({ children }: { children: ReactNode }) {
     try { saved = localStorage.getItem(KEY); } catch { /* Storage may be unavailable. */ }
     if (saved === 'women') setState('women');
   }, []);
-  useEffect(() => { document.documentElement.dataset.collection = collection; }, [collection]);
+  useEffect(() => { document.documentElement.dataset['collection'] = collection; }, [collection]);
   const setCollection = useCallback((next: Collection) => {
     if (next === collection) return;
     withViewTransition(next === 'women' ? 'collection-to-women' : 'collection-to-men', () => {
       setState(next);
-      document.documentElement.dataset.collection = next;
+      document.documentElement.dataset['collection'] = next;
     });
     try { localStorage.setItem(KEY, next); } catch { /* Keep switching usable without storage. */ }
   }, [collection]);
