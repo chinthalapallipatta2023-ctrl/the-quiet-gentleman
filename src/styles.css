@@ -411,3 +411,48 @@ main { animation: page-arrive .65s ease both; }
  .wishlist-heart { top: 8px; right: 8px; width: 36px; height: 36px; }
 }
 @media(prefers-reduced-motion:reduce) { .stylist-spinner { animation: none; } }
+
+/* Brand lockup. */
+.wordmark { gap: 12px; }
+.wordmark-monogram { width: 34px; height: auto; flex-shrink: 0; }
+.wordmark-text { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.wordmark-main { font-family: var(--font-display); font-size: 21px; letter-spacing: .2em; line-height: 1; }
+.wordmark-sub { font-size: 10px; letter-spacing: .32em; color: var(--muted-foreground); line-height: 1; }
+@media (max-width: 640px) { .wordmark-monogram { width: 26px; } .wordmark-main { font-size: 14px; letter-spacing: .14em; } .wordmark-sub { display: block; font-size: 8px; } }
+
+/* Collection palettes: Men = ink and slate stone; Women = rosewood and clay. */
+:root[data-collection=men] { --background: oklch(0.955 0.007 230); --secondary: oklch(0.912 0.012 235); --foreground: oklch(0.25 0.018 255); --muted-foreground: oklch(0.48 0.02 245); --taupe: oklch(0.68 0.02 240); --olive: oklch(0.45 0.05 250); --border: oklch(0.84 0.012 235); --photo-button-foreground: oklch(0.25 0.018 255); }
+:root[data-collection=women] { --background: oklch(0.958 0.014 50); --secondary: oklch(0.918 0.026 38); --foreground: oklch(0.27 0.03 20); --muted-foreground: oklch(0.5 0.04 25); --taupe: oklch(0.7 0.045 32); --olive: oklch(0.52 0.08 18); --border: oklch(0.85 0.025 38); --photo-button-foreground: oklch(0.27 0.03 20); }
+:root.dark[data-collection=men] { --background: oklch(0.2 0.014 255); --secondary: oklch(0.255 0.018 255); --foreground: oklch(0.93 0.008 230); --muted-foreground: oklch(0.73 0.015 240); --border: oklch(0.37 0.02 250); --taupe: oklch(0.7 0.02 240); --olive: oklch(0.72 0.06 245); --paper: oklch(0.26 0.018 255); }
+:root.dark[data-collection=women] { --background: oklch(0.2 0.018 20); --secondary: oklch(0.26 0.024 20); --foreground: oklch(0.94 0.014 45); --muted-foreground: oklch(0.75 0.03 30); --border: oklch(0.38 0.03 22); --taupe: oklch(0.72 0.04 30); --olive: oklch(0.74 0.08 18); --paper: oklch(0.27 0.024 20); }
+.swatch-rose { background: oklch(0.6 0.08 30); } .swatch-cocoa { background: oklch(0.36 0.05 45); } .swatch-oatmeal { background: oklch(0.84 0.03 80); }
+
+/* Men / Women switch. */
+.collection-toggle { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); margin-right: 14px; }
+.collection-option { position: relative; z-index: 1; min-height: 40px; padding: 0 14px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-foreground); background: none; border: 0; cursor: pointer; transition: color .4s ease; }
+.collection-option[aria-checked=true] { color: var(--foreground); }
+.collection-option:focus-visible { outline: 1px solid var(--olive); outline-offset: 2px; }
+.collection-indicator { position: absolute; left: 0; bottom: -1px; width: 50%; height: 2px; background: var(--olive); transition: transform .6s cubic-bezier(.7,0,.2,1), background-color .4s ease; }
+.collection-toggle[data-active=women] .collection-indicator { transform: translateX(100%); }
+
+/* Collection change: the new wardrobe is drawn across the old one like a curtain. */
+html.collection-to-women::view-transition-old(root), html.collection-to-men::view-transition-old(root) { animation: collection-recede 1s cubic-bezier(.7,0,.2,1) both; }
+html.collection-to-women::view-transition-new(root) { animation: curtain-from-right 1s cubic-bezier(.7,0,.2,1) both; }
+html.collection-to-men::view-transition-new(root) { animation: curtain-from-left 1s cubic-bezier(.7,0,.2,1) both; }
+@keyframes curtain-from-right { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0); } }
+@keyframes curtain-from-left { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+@keyframes collection-recede { to { transform: scale(.97); opacity: .6; } }
+
+/* Day / night: an eclipse on the icon, a widening circle of light or shade on the page. */
+.eclipse-toggle { width: 44px; height: 44px; }
+.eclipse-icon { width: 22px; height: 22px; overflow: visible; }
+.eclipse-body { transition: r .6s cubic-bezier(.65,0,.35,1); }
+.eclipse-shadow { transition: cx .7s cubic-bezier(.65,0,.35,1), cy .7s cubic-bezier(.65,0,.35,1); }
+.eclipse-rays { transform-origin: 12px 12px; transition: transform .7s cubic-bezier(.65,0,.35,1), opacity .4s ease; }
+.eclipse-toggle[aria-checked=true] .eclipse-body { r: 8px; }
+.eclipse-toggle[aria-checked=true] .eclipse-shadow { cx: 17px; cy: 7px; }
+.eclipse-toggle[aria-checked=true] .eclipse-rays { transform: rotate(90deg) scale(.4); opacity: 0; }
+html.theme-shift::view-transition-old(root) { animation: none; }
+html.theme-shift::view-transition-new(root) { animation: theme-reveal .8s cubic-bezier(.65,0,.35,1) both; }
+@keyframes theme-reveal { from { clip-path: circle(0 at var(--reveal-x) var(--reveal-y)); } to { clip-path: circle(150vmax at var(--reveal-x) var(--reveal-y)); } }
+@media (max-width: 1024px) { .header-nav .collection-toggle { display: none; } }
