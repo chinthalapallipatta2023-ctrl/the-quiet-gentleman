@@ -456,3 +456,29 @@ html.theme-shift::view-transition-old(root) { animation: none; }
 html.theme-shift::view-transition-new(root) { animation: theme-reveal .8s cubic-bezier(.65,0,.35,1) both; }
 @keyframes theme-reveal { from { clip-path: circle(0 at var(--reveal-x) var(--reveal-y)); } to { clip-path: circle(150vmax at var(--reveal-x) var(--reveal-y)); } }
 @media (max-width: 1024px) { .header-nav .collection-toggle { display: none; } }
+
+/* A dedicated collection rail keeps both choices visible on compact screens. */
+.compact-collection-bar { display: none; }
+@media (max-width: 1024px) {
+ .header-nav { display: none; }
+ .mobile-menu-button { display: inline-flex; justify-self: start; }
+ .header-inner { grid-template-columns: 36px minmax(0,1fr) auto; gap: 12px; }
+ .header-inner > a { justify-self: center; min-width: 0; }
+ .compact-collection-bar { display: flex; justify-content: center; background: var(--background); border-bottom: 1px solid var(--border); padding: 5px 20px; }
+ .compact-collection-toggle { width: min(100%, 320px); margin: 0; border-bottom: 0; }
+ .compact-collection-toggle .collection-option { min-height: 44px; font-size: 14px; letter-spacing: 0; }
+ .compact-collection-toggle .collection-indicator { bottom: 0; }
+}
+@media (max-width: 480px) {
+ .header-actions > a { display: none; }
+ .header-inner { gap: 4px; }
+ .wordmark { gap: 7px; }
+ .wordmark-main { font-size: 14px; letter-spacing: 0; }
+ .wordmark-sub { letter-spacing: 0; }
+ .eclipse-toggle { width: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+ html.collection-to-women::view-transition-old(root), html.collection-to-men::view-transition-old(root),
+ html.collection-to-women::view-transition-new(root), html.collection-to-men::view-transition-new(root),
+ html.theme-shift::view-transition-new(root) { animation: none; }
+}

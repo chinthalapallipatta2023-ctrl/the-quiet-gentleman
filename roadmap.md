@@ -1,4 +1,6 @@
 # Flagship experience
+- [ ] Fix the remaining catalogue test error and verify the preview loads.
+- [ ] Keep Men/Women switching visible on phone and tablet screens and verify both palettes.
 - [x] Establish editorial design system and coherent demonstration imagery.
 - [x] Build homepage, wardrobe, product pages, journal and approach destinations.
 - [x] Implement accessible search, mobile navigation, size selection and session-only demonstration bag.
